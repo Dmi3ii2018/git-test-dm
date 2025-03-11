@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { authenticateGitHub } from "../../store/user";
+import { useNavigate } from "react-router";
 
 import { Form, Input, Button } from "antd";
+
+import { Endpoints } from "../../routes";
+import { authenticateGitHub } from "../../store/user";
 
 import "./style.css";
 
@@ -12,12 +15,17 @@ type FieldType = {
 
 export function Login() {
   const dispatch = useDispatch();
-  const { user, status, error } = useSelector((state) => state.user);
+  let navigate = useNavigate()
+  const { status } = useSelector((state) => state.user);
 
   const onFinish = async (values: any) => {
     const { login, token } = values;
 
-    dispatch(authenticateGitHub({ login, token }));
+    const res = await dispatch(authenticateGitHub({ login, token }));
+
+    if (res.payload) {
+      navigate(Endpoints.REPOS)
+    }
   };
 
   return (
