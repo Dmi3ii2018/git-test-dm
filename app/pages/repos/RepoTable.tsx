@@ -1,17 +1,15 @@
 import { useEffect } from "react";
-import { Table, Button, Space, message } from "antd";
+import { Table, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
   fetchRepositories,
-  updateRepository,
-  deleteRepository,
 } from "../../store/repos";
 import type { RootState } from "../../store/store";
 
 import { UpdateRepo } from "./UpdateRepo";
 import { DeleteRepoButton } from "./DeleteRepo";
-
+import { RepoDetailsModal } from "./RepoDescription";
 interface RepoTableProps {
   login?: string;
   token?: string | null;
@@ -27,27 +25,6 @@ export function RepoTable({ login, token }: RepoTableProps) {
     if (!login || !token) return;
     dispatch(fetchRepositories({ login, token }) as any);
   }, [dispatch, login, token]);
-
-  const handleUpdate = (repoName: string) => {
-    if (!login || !token) return;
-    dispatch(
-      updateRepository({
-        login,
-        token,
-        repoName,
-        data: { description: "Обновленное описание" },
-      }) as any
-    )
-      .then(() => message.success(`Репозиторий ${repoName} обновлен`))
-      .catch(() => message.error(`Ошибка обновления ${repoName}`));
-  };
-
-  const handleDelete = (repoName: string) => {
-    if (!login || !token) return;
-    dispatch(deleteRepository({ login, token, repoName }) as any)
-      .then(() => message.success(`Репозиторий ${repoName} удален`))
-      .catch(() => message.error(`Ошибка удаления ${repoName}`));
-  };
 
   const columns = [
     {
@@ -89,12 +66,19 @@ export function RepoTable({ login, token }: RepoTableProps) {
                 repoName={record.name}
               />
             )}
+            {login && token && (
+              <RepoDetailsModal
+                login={login}
+                token={token}
+                repoName={record.name}
+              />
+            )}
           </Space>
         );
       },
     },
   ];
-
+console.log(repositories)
   if (status === "loading") return <p>Загрузка...</p>;
   if (error) return <p>Ошибка: {error}</p>;
 

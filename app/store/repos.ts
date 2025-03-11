@@ -9,16 +9,26 @@ interface Repository {
   description: string | null;
 }
 
+type RequestStatus = "idle" | "loading" | "succeeded" | "failed";
+
 interface GitHubState {
   repositories: Repository[];
-  selectedRepo: Repository | null;
-  status: "idle" | "loading" | "succeeded" | "failed";
+  selectedRepo: {
+    data: Repository | null;
+    status: RequestStatus;
+    error: string | null;
+  }
+  status: RequestStatus;
   error: string | null;
 }
 
 const initialState: GitHubState = {
   repositories: [],
-  selectedRepo: null,
+  selectedRepo: {
+    data: null,
+    status: 'idle',
+    error: null,
+  },
   status: "idle",
   error: null,
 };
@@ -131,7 +141,14 @@ const githubSlice = createSlice({
       })
       // Получение информации о репозитории
       .addCase(fetchRepositoryDetails.fulfilled, (state, action: PayloadAction<Repository>) => {
-        state.selectedRepo = action.payload;
+        state.selectedRepo.status = "succeeded";
+        state.selectedRepo.data = action.payload;
+      })
+      .addCase(fetchRepositoryDetails.pending, (state) => {
+        state.selectedRepo.status = "loading";
+      })
+      .addCase(fetchRepositoryDetails.rejected, (state) => {
+        state.selectedRepo.error = "failed";
       })
       .addCase(createRepository.fulfilled, (state, action: PayloadAction<Repository>) => {
         state.repositories = [action.payload, ...state.repositories]
