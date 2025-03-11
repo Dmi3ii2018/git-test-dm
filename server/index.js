@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@react-router/node";
-import { ServerRouter, useMatches, useActionData, useLoaderData, useParams, useRouteError, Meta, Links, ScrollRestoration, Scripts, BrowserRouter, Outlet, isRouteErrorResponse, useNavigate } from "react-router";
+import { ServerRouter, useMatches, useActionData, useLoaderData, useParams, useRouteError, Meta, Links, ScrollRestoration, Scripts, Outlet, isRouteErrorResponse, useNavigate } from "react-router";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 import { createElement, useState, useEffect } from "react";
@@ -261,10 +261,7 @@ function Layout({
 const root = withComponentProps(function App() {
   return /* @__PURE__ */ jsx(Provider, {
     store,
-    children: /* @__PURE__ */ jsx(BrowserRouter, {
-      basename: "/git-test-dm",
-      children: /* @__PURE__ */ jsx(Outlet, {})
-    })
+    children: /* @__PURE__ */ jsx(Outlet, {})
   });
 });
 const ErrorBoundary = withErrorBoundaryProps(function ErrorBoundary2({
@@ -639,7 +636,7 @@ const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: repos
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-B4oEpci2.js", "imports": ["/assets/chunk-K6CSEXPM-7Dv-G19U.js", "/assets/index-D0OzdCN1.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": true, "module": "/assets/root-BTzWNEHm.js", "imports": ["/assets/chunk-K6CSEXPM-7Dv-G19U.js", "/assets/index-D0OzdCN1.js", "/assets/index-CjrCo1eI.js", "/assets/repos-DE3SW8Bp.js", "/assets/user-wySfj8O5.js"], "css": [], "clientActionModule": void 0, "clientLoaderModule": void 0, "hydrateFallbackModule": void 0 }, "routes/login": { "id": "routes/login", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/login-BIRHb6aq.js", "imports": ["/assets/index-CjrCo1eI.js", "/assets/chunk-K6CSEXPM-7Dv-G19U.js", "/assets/user-wySfj8O5.js", "/assets/index-DSrGUT64.js", "/assets/index-D0OzdCN1.js"], "css": ["/assets/login-CCc5V1-n.css"], "clientActionModule": void 0, "clientLoaderModule": void 0, "hydrateFallbackModule": void 0 }, "routes/repos": { "id": "routes/repos", "parentId": "root", "path": "repos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/repos-B99Umd9j.js", "imports": ["/assets/index-CjrCo1eI.js", "/assets/chunk-K6CSEXPM-7Dv-G19U.js", "/assets/repos-DE3SW8Bp.js", "/assets/index-DSrGUT64.js", "/assets/index-D0OzdCN1.js"], "css": ["/assets/repos-DlzZDt19.css"], "clientActionModule": void 0, "clientLoaderModule": void 0, "hydrateFallbackModule": void 0 } }, "url": "/assets/manifest-ee9271fa.js", "version": "ee9271fa" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-twZutndp.js", "imports": ["/assets/chunk-K6CSEXPM-4mSyEK9p.js", "/assets/index-DfuGBccL.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": true, "module": "/assets/root-By7C6zCD.js", "imports": ["/assets/chunk-K6CSEXPM-4mSyEK9p.js", "/assets/index-DfuGBccL.js", "/assets/index-DTAP5zJS.js", "/assets/repos-4xT3LU5-.js", "/assets/user-BIhsPN22.js"], "css": [], "clientActionModule": void 0, "clientLoaderModule": void 0, "hydrateFallbackModule": void 0 }, "routes/login": { "id": "routes/login", "parentId": "root", "path": void 0, "index": true, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/login-H5pakGVT.js", "imports": ["/assets/index-DTAP5zJS.js", "/assets/chunk-K6CSEXPM-4mSyEK9p.js", "/assets/user-BIhsPN22.js", "/assets/index-CceGS_MW.js", "/assets/index-DfuGBccL.js"], "css": ["/assets/login-CCc5V1-n.css"], "clientActionModule": void 0, "clientLoaderModule": void 0, "hydrateFallbackModule": void 0 }, "routes/repos": { "id": "routes/repos", "parentId": "root", "path": "repos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/repos-C3FFicrd.js", "imports": ["/assets/index-DTAP5zJS.js", "/assets/chunk-K6CSEXPM-4mSyEK9p.js", "/assets/repos-4xT3LU5-.js", "/assets/index-CceGS_MW.js", "/assets/index-DfuGBccL.js"], "css": ["/assets/repos-DlzZDt19.css"], "clientActionModule": void 0, "clientLoaderModule": void 0, "hydrateFallbackModule": void 0 } }, "url": "/assets/manifest-8c8afb46.js", "version": "8c8afb46" };
 const assetsBuildDirectory = "build/client";
 const basename = "/";
 const future = { "unstable_middleware": false, "unstable_optimizeDeps": false, "unstable_splitRouteModules": false, "unstable_viteEnvironmentApi": false };
