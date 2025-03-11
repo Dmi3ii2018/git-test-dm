@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Avatar, Layout } from "antd";
 
 import type { RootState } from "../../store/store";
@@ -22,14 +22,11 @@ interface DataType {
 
 export function ReposPage() {
   let navigate = useNavigate();
-  const dispatch = useDispatch();
   const { user, token } = useSelector((state: RootState) => state.user);
 
-  console.log(token);
 
   useEffect(() => {
     if (!token) {
-      console.log("nav");
       navigate("/");
     }
   }, [token]);
@@ -40,7 +37,7 @@ export function ReposPage() {
         <Header className="header">
           <CreateRepoButton login={user?.login} token={token} />
           <div className="logo">
-            <p className="username">{user?.login || ""}</p>
+            <div className="username">{user?.login || ""}</div>
             <Avatar src={user?.avatar_url} />
           </div>
         </Header>
