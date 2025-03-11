@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Alert } from "antd";
 
 import { Endpoints } from "../../routes";
 import { authenticateGitHub } from "../../store/user";
@@ -15,8 +15,8 @@ type FieldType = {
 
 export function Login() {
   const dispatch = useDispatch();
-  let navigate = useNavigate()
-  const { status } = useSelector((state) => state.user);
+  let navigate = useNavigate();
+  const { status, error } = useSelector((state) => state.user);
 
   const onFinish = async (values: any) => {
     const { login, token } = values;
@@ -24,9 +24,11 @@ export function Login() {
     const res = await dispatch(authenticateGitHub({ login, token }));
 
     if (res.payload) {
-      navigate(Endpoints.REPOS)
+      navigate(Endpoints.REPOS);
     }
   };
+
+  const isLoading = status === "loading";
 
   return (
     <main className="container">
@@ -40,6 +42,7 @@ export function Login() {
           login: "Dmi3ii2018",
         }}
         autoComplete="off"
+        requiredMark
       >
         <Form.Item<FieldType>
           label="Login"
@@ -57,12 +60,14 @@ export function Login() {
           <Input.Password />
         </Form.Item>
 
+        {error && !isLoading && <Alert message={error} type="error" showIcon style={{ marginBottom: 16 }} />}
+
         <Form.Item label={null}>
           <Button
             type="primary"
             htmlType="submit"
-            disabled={status === "loading"}
-            loading={status === "loading"}
+            disabled={isLoading}
+            loading={isLoading}
           >
             OK
           </Button>
