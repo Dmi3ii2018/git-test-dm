@@ -1,3 +1,5 @@
+import { ReposPage } from "../pages/repos/ReposPage";
+
 export default function Repos() {
-  return <div>Repos</div>;
+  return <ReposPage />;
 }

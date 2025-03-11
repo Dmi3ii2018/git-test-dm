@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 
 import { Form, Input, Button, Alert } from "antd";
 
+import type { RootState } from "../../store/store";
+
 import { Endpoints } from "../../routes";
 import { authenticateGitHub } from "../../store/user";
 
@@ -13,10 +15,10 @@ type FieldType = {
   token?: string;
 };
 
-export function Login() {
+export function LoginPage() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const { status, error } = useSelector((state) => state.user);
+  const { status, error } = useSelector((state: RootState) => state.user);
 
   const onFinish = async (values: any) => {
     const { login, token } = values;

@@ -1,6 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+interface User {
+  id: number,
+  login: string;
+  avatar_url: string;
+}
+interface UserState {
+  user: User | null;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
+  token: string | null;
+}
+
+const initialState: UserState = {
+  user: null,
+  status: 'idle',
+  error: null,
+  token: null,
+}
+
 export const authenticateGitHub = createAsyncThunk(
   'auth/authenticateGitHub',
   async ({ login, token }: {login: string, token: string}) => {
@@ -9,17 +28,13 @@ export const authenticateGitHub = createAsyncThunk(
         Authorization: `token ${token}`,
       },
     });
-    return response.data;
+    return {response: response.data, token};
   }
 );
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    user: null,
-    status: 'idle',
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
     logout: (state) => {
       state.user = null;
@@ -34,7 +49,8 @@ const authSlice = createSlice({
       })
       .addCase(authenticateGitHub.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.user = action.payload;
+        state.user = action.payload.response;
+        state.token = action.payload.token
       })
       .addCase(authenticateGitHub.rejected, (state, action) => {
         state.status = 'failed';
