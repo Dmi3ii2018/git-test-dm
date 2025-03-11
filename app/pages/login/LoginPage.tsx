@@ -40,9 +40,6 @@ export function LoginPage() {
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 800 }}
         onFinish={onFinish}
-        initialValues={{
-          login: "Dmi3ii2018",
-        }}
         autoComplete="off"
         requiredMark
       >
