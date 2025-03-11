@@ -78,7 +78,7 @@ export function RepoTable({ login, token }: RepoTableProps) {
       },
     },
   ];
-
+console.log(repositories)
   if (status === "loading") return <p>Загрузка...</p>;
   if (error) return <p>Ошибка: {error}</p>;
 

@@ -28,7 +28,6 @@ export function RepoDetailsModal({
       message.error("Ошибка при загрузке репозитория");
     }
   };
-
   const handleCancel = () => setIsModalOpen(false);
 
 const isLoading = status === 'loading' 
